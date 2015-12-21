@@ -28,6 +28,8 @@ public class ArenaDacArena extends Arena{
 	static int vie = 2;
 	static boolean verifVie = true;
 	HashMap<Player, Integer> nbr_vie_player;
+	int vieok = 0;
+	Material mm;
 	
 	
 	//-----------------
@@ -42,7 +44,7 @@ public class ArenaDacArena extends Arena{
 		
 		TpAllPlayerSpawn();
 		
-		setLivePlayer();
+		setLivePlayer();		
 		
 		TpPlayerPlongeoir(Player_Team(numero_team));
 	}
@@ -121,28 +123,38 @@ public class ArenaDacArena extends Arena{
 		    	DyeColor c = TeamUtil.getDyeColor(numero_team);
 		    	byte d = c.getData();
 		    	
-		    	b.setType(Material.WOOL);
-		        b.setData(d);
-		        
-		        for(int i = 0;i < 3;i++){
-		        	if(b.getRelative(0, i, 0).getType() == Material.WATER){
-		        		b.getRelative(0, i, 0).setType(Material.WOOL);
-			        	b.getRelative(0, i, 0).setData(d);
-		        	}		        	
-		        }
-		        for(int ii = -4;ii < 0;ii++){
-		        	if(b.getRelative(0, ii, 0).getType() == Material.WATER){
-		        		b.getRelative(0, ii, 0).setType(Material.WOOL);
-			        	b.getRelative(0, ii, 0).setData(d);
-		        	}
-		        }
-		        
-		        // On Vérifi si le joueur a fait une vie
+		    	// On Vérifi si le joueur a fait une vie
 		        //--------------------------------------
 		        if(verifVie == true){
 		        	verif_vie(l, e.getPlayer());
 		        }
+		    	
+		        // On défini le Material à mettre
+		        //-------------------------------
+		        if(vieok == 0){
+		        	mm = Material.WOOL;
+		        }
+		        else{
+		        	mm = Material.GLASS;
+		        }
+
+		        // On change les blocs en verre ou en laine
+		        //-----------------------------------------
+		        for(int i = 0;i < 3;i++){
+		        	if(b.getRelative(0, i, 0).getType() == Material.WATER || b.getRelative(0, i, 0).getType() == Material.STATIONARY_WATER || b.getRelative(0, i, 0).getType() == Material.LAVA){
+		        		b.getRelative(0, i, 0).setType(mm);
+			        	b.getRelative(0, i, 0).setData(d);
+		        	}		        	
+		        }
+		        for(int ii = -4;ii < 0;ii++){
+		        	if(b.getRelative(0, ii, 0).getType() == Material.WATER || b.getRelative(0, ii, 0).getType() == Material.STATIONARY_WATER || b.getRelative(0, ii, 0).getType() == Material.LAVA){
+		        		b.getRelative(0, ii, 0).setType(mm);
+			        	b.getRelative(0, ii, 0).setData(d);
+		        	}
+		        }
 		        
+		        // On verifi si tous les joueurs ont fait leur saut
+		        //-------------------------------------------------
 		        if(nbr_teams != numero_team + 1){
 		        	numero_team = numero_team +1;		        	
 		        	TpPlayerPlongeoir(Player_Team(numero_team));
@@ -152,6 +164,9 @@ public class ArenaDacArena extends Arena{
 		        	numero_team = 0;
 		        	TpPlayerPlongeoir(Player_Team(numero_team));
 		        }
+		        
+		        // On téléporte le joueur au spawn après son saut
+		        //-----------------------------------------------
 		        e.getPlayer().teleport(locationSpawnStart);
 	    	}
 	    }
@@ -212,6 +227,10 @@ public class ArenaDacArena extends Arena{
 			nbr_vie_player.replace(player, v);
 			player.sendMessage("Félicitation vous avez gagner une vie");
 			player.sendMessage("il vous en reste : " + v);
+			vieok = 1;
+		}
+		else{
+			vieok = 0;
 		}
 	}
 	

@@ -1,6 +1,6 @@
 name: ArenaDac
 main: kana.ArenaDac.ArenaDac
-version: 0.0.1
+version: 0.0.2
 depend: [BattleArena]
 authors: [kana34]
 commands:
