@@ -1,0 +1,42 @@
+configVersion: 2.0
+## This should be places in the plugin directory
+## for more help configuring see the wiki
+## https://github.com/alkarinv/BattleArena/wiki
+## Change this file to customize your event
+
+ArenaDac:
+    enabled: true
+    database: dac # or delete if you dont want wins/losses/top, needs BattleTracker
+    rated: true # if database is enabled
+    prefix: "&7[DAC]&e"
+    cmd: dac
+    joinType: Queue
+    victoryCondition: LastManStanding
+    nTeams: 2+
+    teamSize: 1
+    times:
+        matchTime: -1
+    ### You can delete any stages/transitions that have no options
+    ### for a list of options see wiki
+    preReqs: ## Prerequisites for joining
+        options: []
+    onEnter:
+        options: [storeAll]
+    onLeave:
+        options: [restoreAll]
+    onJoin:  ## when they join the match
+        options: []
+    onPrestart: ## x seconds before onStart
+        options: []
+    onStart: ## Starting
+        options: [teleportIn, pvpOff, woolTeams, wgNoEnter, wgResetRegion, wgClearRegion]
+    onSpawn: ## what happens when a player spawns
+        options: [hunger=20, health=20]
+    onDeath: ## what happens when a player dies
+        options: [respawn, clearInventory]
+    onComplete: ## what happens when things end
+        options: [teleportOut, clearInventory]
+    winner: ## what to give the winner
+        options: [health=20, hunger=20]
+    losers: ## what to give the losers
+        options: []

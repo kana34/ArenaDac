@@ -1,0 +1,8 @@
+name: ArenaDac
+main: kana.ArenaDac.ArenaDac
+version: 0.0.1
+depend: [BattleArena]
+authors: [kana34]
+commands:
+    dac:
+        aliases: [dac]
