@@ -27,7 +27,7 @@ public class ArenaDacArena extends Arena{
 	Player playerSaut = null;
 	static int vie = 2;
 	static boolean verifVie = true;
-	HashMap<Player, Integer> nbr_vie_player;
+	static HashMap<Player, Integer> nbr_vie_player;
 	int vieok = 0;
 	Material mm;
 	

@@ -5,19 +5,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import mc.alk.arena.BattleArena;
 import mc.alk.arena.util.Log;
+import kana.ArenaDac.ArenaDacCommand;
 
 public class ArenaDac extends JavaPlugin{
 	
 	@Override
 	public void onEnable(){
-		/// Registers this plugin with BattleArena
-		/// this: our plugin
-		/// "OneInTheChamber": The name of our competition
-		/// "oic": the name of our command alias
-		/// OITCArena.class: which arena should this competition use
-		BattleArena.registerCompetition(this, "ArenaDac", "dac", ArenaDacArena.class);
+		
+		BattleArena.registerCompetition(this, "ArenaDac", "dac", ArenaDacArena.class, new ArenaDacCommand());
 
-		/// Load our config options
 		saveDefaultConfig();
 		loadConfig();
 
@@ -35,10 +31,8 @@ public class ArenaDac extends JavaPlugin{
 	}
 	
 	public void loadConfig(){
-		/// Allow the damage to be set through the config.yml, if it exists and has the section: 'damage: <value>'
-		/// Like 'damage: 15'
 		FileConfiguration config = getConfig();
 		ArenaDacArena.vie = config.getInt("nbrVie", 2);
 		ArenaDacArena.verifVie = config.getBoolean("vie", true);
-	}
+	}	
 }
