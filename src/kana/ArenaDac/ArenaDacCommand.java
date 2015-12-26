@@ -10,12 +10,18 @@ public class ArenaDacCommand extends CustomCommandExecutor{
 	@MCCommand(cmds={"vie"}, admin=false)
 	public boolean vie(Player p) {
 		if(ArenaDacArena.nbr_vie_player == null){
-			p.sendMessage("Aucune partie n'est en cours !");
+			p.sendMessage("[ArenaDac] Vous ne participez à aucune partie !");
 			return false;
 		}
 		else{
-			p.sendMessage("Vies: " + ArenaDacArena.nbr_vie_player.get(p.getName()));
-			return true;
+			if(ArenaDacArena.nbr_vie_player.get(p) == null){
+				p.sendMessage("[ArenaDac] Vous ne participez à aucune partie !");
+				return false;
+			}
+			else{
+				p.sendMessage("[ArenaDac] Vie(s): " + ArenaDacArena.nbr_vie_player.get(p));
+				return true;				
+			}
 		}
     }
 }

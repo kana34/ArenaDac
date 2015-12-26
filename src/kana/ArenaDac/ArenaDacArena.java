@@ -185,14 +185,14 @@ public class ArenaDacArena extends Arena{
 				//-----------------------------------
 				if(v == 0){
 					e.setDamage(20);
-					p.sendMessage("Vous avez loupez votre saut !");
+					p.sendMessage("[ArenaDac] Vous avez loupé votre saut !");
 				}
 				else{
 					e.setDamage(0);
-					p.sendMessage("Vous avez loupez votre saut !");
-					p.sendMessage("Vous perdez une vie !");
+					p.sendMessage("[ArenaDac] Vous avez loupé votre saut !");
+					p.sendMessage("[ArenaDac] Vous perdez une vie :(");
 					nbr_vie_player.replace(p, v);
-					p.sendMessage("il vous en reste : " + v);
+					p.sendMessage("[ArenaDac] Il vous en reste : " + v);
 					p.teleport(locationSpawnStart);
 				}
 				
@@ -225,16 +225,12 @@ public class ArenaDacArena extends Arena{
 		if(m1 == Material.WOOL && m2 == Material.WOOL && m3 == Material.WOOL && m4 == Material.WOOL){
 			int v = nbr_vie_player.get(player) + 1;
 			nbr_vie_player.replace(player, v);
-			player.sendMessage("Félicitation vous avez gagner une vie");
-			player.sendMessage("il vous en reste : " + v);
+			player.sendMessage("[ArenaDac] Félicitation vous avez gagné une vie :)");
+			player.sendMessage("[ArenaDac] Il vous en reste : " + v);
 			vieok = 1;
 		}
 		else{
 			vieok = 0;
 		}
 	}
-	
-	//---------------------------------------------
-	//---- On vérifi si il reste que 2 joueurs ----
-	//---------------------------------------------
 }
